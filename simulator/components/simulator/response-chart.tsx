@@ -71,8 +71,8 @@ export function ResponseChart({ points, playhead, maxHeight, operatingHeight }: 
               cursor={{ stroke: 'var(--muted-foreground)', strokeDasharray: '3 3' }}
               content={
                 <ChartTooltipContent
-                  labelFormatter={(value) => {
-                    const t = Number(value)
+                  labelFormatter={(value, payload) => {
+                    const t = Number(payload?.[0]?.payload?.time ?? value)
                     return Number.isFinite(t) ? `t = ${formatNumber(t, 2)} h` : 't = —'
                   }}
                   formatter={(value, name, item) => (
