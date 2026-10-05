@@ -71,7 +71,10 @@ export function ResponseChart({ points, playhead, maxHeight, operatingHeight }: 
               cursor={{ stroke: 'var(--muted-foreground)', strokeDasharray: '3 3' }}
               content={
                 <ChartTooltipContent
-                  labelFormatter={(value) => `t = ${formatNumber(Number(value), 2)} h`}
+                  labelFormatter={(value) => {
+                    const t = Number(value)
+                    return Number.isFinite(t) ? `t = ${formatNumber(t, 2)} h` : 't = —'
+                  }}
                   formatter={(value, name, item) => (
                     <div className="flex w-full items-center justify-between gap-3">
                       <span className="flex items-center gap-2 text-muted-foreground">
@@ -83,7 +86,7 @@ export function ResponseChart({ points, playhead, maxHeight, operatingHeight }: 
                         {chartConfig[name as keyof typeof chartConfig]?.label ?? name}
                       </span>
                       <span className="font-mono tabular-nums">
-                        {formatNumber(Number(value), 3)} m
+                        {Number.isFinite(Number(value)) ? `${formatNumber(Number(value), 3)} m` : '—'}
                       </span>
                     </div>
                   )}
