@@ -1,0 +1,6 @@
+# Local agent state
+.atl/
+
+# Simulink cache
+*.slxc
+slprj/
