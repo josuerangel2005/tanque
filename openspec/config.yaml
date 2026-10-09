@@ -2,11 +2,28 @@ schema: spec-driven
 
 context: |
   Project: simu_tanque (tank simulation, academic modeling).
-  Workspace holds only 'Modelo matematico del Tanque.docx'; no code yet.
-  Stack: none detected. Architecture: none. Testing: no runner.
-  Strict TDD is OFF until a stack and workspace test command exist.
+  Workspace: simulator/ (web app), Simulink/ (MATLAB model), docs/ (Spanish
+  documentation), entrega/ (deliverables, empty).
+  Stack: Next.js 16.3.3, React 19, TypeScript 5.7.3 (strict), Tailwind 4,
+  shadcn/base-ui, Recharts 3, pnpm. Math model in
+  simulator/lib/water-tank-model.ts.
+  Conventions: conventional commits, Spanish docs. No linter, formatter or CI.
+  Testing: no runner. Type-checking through the simulator build is the only
+  quality gate.
+  Strict TDD is OFF until a workspace test command exists.
 
-projects: []
+projects:
+  - path: simulator
+    stack: Next.js 16.3.3, React 19, TypeScript 5.7.3 (strict), Tailwind 4, Recharts 3
+    package_manager: pnpm
+    build_command: pnpm build
+    test_command: ""
+    lint_command: ""
+  - path: Simulink
+    stack: MATLAB Simulink model (simulacion_tanqueAgua.slx)
+    build_command: ""
+    test_command: ""
+    lint_command: ""
 
 rules:
   proposal:
@@ -27,7 +44,7 @@ rules:
     test_command: ""
   verify:
     test_command: ""
-    build_command: ""
+    build_command: "pnpm --dir simulator build"
     coverage_threshold: 0
   archive:
     - Warn before merging destructive deltas
